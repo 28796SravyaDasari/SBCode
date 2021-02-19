@@ -1,0 +1,106 @@
+<!--View Information-->
+<!--View name : Note Detail-->
+<!--Controller name : noteDetailCtrl-->
+<!--Controller path : www/templates/application-storage/local-application-db/js/controllers.js-->
+<!--State name : app.notedetail-->
+<!--URL : #app/notedetail-->
+
+<ion-view view-title="">
+    <!--left button on navigation bar-->
+    <ion-nav-buttons side="left">
+        <a ui-sref="app.lecture" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back"></i>
+        </a>
+    </ion-nav-buttons><!--end left button on navigation bar-->
+
+    <!--note detail section-->
+    <form name="noteForm">
+        <ion-content>
+            <!--toolbar section-->
+            <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium toolbar-in-content">
+                <div>
+                    <h1>
+                        <i class="ion-android-list"></i>
+                    </h1>
+
+                    <h3>Upload Material</h3>
+                </div>
+                <a class="md-button md-accent md-fab fab-toolbar-medium"
+                   ng-click="showListBottomSheet($event,noteForm)"
+                   aria-label="showListBottomSheet">
+                    <i class="ion-archive"></i>
+                </a>
+            </md-toolbar><!--end toolbar section-->
+            <div id="note-detail-content">
+                <!--content section-->
+                <p>
+                    <i class="ion-android-calendar"></i> {{note.createDate}}
+                </p>
+                <md-input-container md-no-float>
+                    <input required name="noteTitle" placeholder="Title (Required)" ng-model="note.title">
+                </md-input-container>
+   <center> <div layout-margin layout-padding>
+    <input class="ng-hide" id="input-file-id" multiple type="file" />
+<label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+   
+</div>
+                <textarea rows="4" ng-model="note.detail" maxlength="250"
+                          placeholder="Description / Summary / Overview "></textarea>
+                
+            </div><!--end content section-->
+                <div class="row">
+                    <div class="col">
+                        <center><h4>Assign from Storage</h4>    </center>
+              <ion-list >
+        <div ng-repeat="group in groups">
+          <ion-item class="minuspad"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-folder'"></i>
+            &nbsp;
+            Group {{group.name}}
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="item in group.items"
+                    ng-show="isGroupShown(group)" can-swipe="true">
+          <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">&nbsp; &nbsp;
+          
+           <i class="fa fa-file-word-o "></i> {{item}}
+               <ion-option-button class="button-assertive ion-trash-a" ></ion-option-button></md-checkbox>
+          </ion-item>
+        </div>
+      </ion-list>
+                </div>
+                </div>
+        </ion-content>
+    </form><!--end note detail section-->
+
+
+    <!--angular template section-->
+    <script type="text/ng-template" id="contract-actions-template">
+        <md-bottom-sheet class="md-list md-has-header">
+            <h1 class="md-bottom-sheet-header">Actions</h1>
+            <!--list section-->
+            <md-list>
+               <md-list-item>
+                    <a class="md-default-theme md-bottom-sheet-list-item"
+                       ng-class="{ 'disabled-link': disableSaveBtn}"
+                       ng-click="saveNote(note,$event)">
+                        <i class="ion-android-list"></i>
+                        <span>Save Material</span>
+                    </a>
+                </md-list-item>
+
+                <md-list-item ng-show="actionDelete">
+                    <a class="md-default-theme md-bottom-sheet-list-item"
+                       ng-click="deleteNote(note,$event)">
+                        <i class="ion-android-delete"></i>
+                        <span>Remove Note</span>
+                    </a>
+                </md-list-item>
+            </md-list>
+            <!--end list section-->
+        </md-bottom-sheet>
+    </script><!--end angular template section-->
+
+</ion-view>

@@ -1,0 +1,51 @@
+<!--View Information-->
+<!--View name : Online Course-->
+<!--State name : app.onlineCourse-->
+<!--URL : #app/onlineCourse-->
+<!--Online course section-->
+<ion-view title="Manage Students" id="online-course">
+     <!--end left button on navigation bar-->
+    <!--toolbar section-->
+    <ion-content ng-init="getAllStudents()">   
+        <center><h4>Make Selections to Manage</h4></center>
+            <div class="row">
+        <div class="col-33 item  no-border">
+            <!--<md-select ng-model="a" class="custom">
+                <md-option selected="selected">Class</md-option>
+                <md-option>BCOM</md-option>
+                <md-option>MCOM</md-option>
+                <md-option>FYJC</md-option>
+            </md-select>-->
+        </div>
+        <div class="col-50 item no-border" >
+            <md-select ng-model="b" class="custom">
+                <md-option selected="selected" value="">Course</md-option>
+                <md-option ng-repeat="corse in Course" value="{{corse.name}}">{{corse.name}}</md-option>
+            </md-select>
+        </div>
+        <div class="col-33 item no-border" >
+           <!-- <md-select ng-model="c">
+                <md-option selected="selected">Division</md-option>
+                <md-option>A</md-option>
+                <md-option>B</md-option>
+                <md-option>C</md-option>
+            </md-select>-->
+        </div>
+    </div>
+        </div>
+        <ion-list show-delete="false" can-swipe="true">
+           
+            <ion-item href="#"  class="item item-text-wrap" ng-repeat="stud in Students | filter:b">
+            <i class="ion ion-pound"></i>&nbsp;{{stud.rollno}} - <b>{{stud.Studname}}</b><br>
+            <!--Attendance: 67%-->
+            <!--<ion-option-button ng-click="showmap(stud.lati,stud.longi)" class="button-calm ion-ios-location" ></ion-option-button>-->
+            </ion-item> 
+        </ion-list>
+       
+    </ion-content>
+    <!--  
+<div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" aria-label="Add"> <i class="ion-android-star"></i> </a>
+    </div>-->
+</ion-view>
+<!--end online course section-->

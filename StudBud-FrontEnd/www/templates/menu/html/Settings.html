@@ -1,0 +1,45 @@
+﻿
+<ion-view title="Settings">
+    
+   
+        <ion-content id="contract-details-content" ng-init='loadSubject()'>
+            <script id="templates/custom.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive" >
+          <h1 class="title">Change Password</h1>
+          <button class="button button-clear button-primary" ng-click="modalCust.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+        
+          <input type="text" ng-model="reply" id="oldpass" placeholder="Old Password">
+                <br />
+        
+       <input type="text" ng-model="replyy" id="newpass" placeholder="New Password">
+       
+                <br />
+               <div class="row center" style="float:none;width:100%"> 
+                   <a style="width:95%" class="button button-full button-positive"  ng-click="changePass(reply,replyy);"><i class="fa fa-refresh"></i>&nbsp; Change Password</a></div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    
+           <div class="list">
+
+               <div class="item item-divider">
+                    Profile Settings
+               </div>
+
+               <a class="item item-icon-left" href="#" ng-click="askChngPassPermi()">
+                    <i class="icon fa fa-undo" style="font-size:20px"></i>
+                    Change Password
+               </a>
+
+           </div>
+        </ion-content>
+       
+    <div id="note-list-loading-progress" class="loading-progress fade-in">
+        <ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+        <md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <!--end loading progress-->
+</ion-view>

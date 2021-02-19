@@ -1,0 +1,54 @@
+<ion-view hide-nav-bar="true" style="background-color:#e91e63" >
+    <md-toolbar class="bar-subheader md-tall  toolbar-medium">
+        <div>
+            <h1>StudBud</h1>
+            <h2>Starting you up!</h2>
+        </div>
+    </md-toolbar>
+    
+    <!--dashboard section-->
+    <ion-content id="dashboard-content">
+<br>
+<br>
+<br>
+        <div class="card">
+        <div class="item item-divider">
+       To set things right for you Teacher..
+
+        </div>
+     
+            <div class="row">
+                <div class="col">
+      <center>
+          <input type="text" placeholder="Enter your unique id" ng-model="logonid.UserId"></div></center></div>
+             <div class="row">
+               <div class="col">
+      <center>
+          <input type="password" placeholder="Enter your Password" ng-model="logonid.Password"></div></center></div>
+            
+             <section layout="column">
+      <a class="md-raised md-button md-accent" style="width:95%" ng-click="login(logonid)">Logon</a>
+                 <!--<md-button class="md-raised md-accent" flex ng-click="sendPassword(logonid)">Forgot Password</md-button>-->
+      
+    </section>
+        <center>
+                <section class="royal" ng-click="forgotPassword(logonid.UserId)">Forgot Password</section>
+            </center>
+            
+    
+    </div>
+    </div>
+    
+          <!--list section-->
+        
+        <!--list section-->
+       
+
+        <!--Below code it will disable animation to better performance-->
+       
+       
+            </md-list-item>
+        </md-list>
+        <!--end list section-->
+    </ion-content><!--end dashboard section-->
+</ion-view>

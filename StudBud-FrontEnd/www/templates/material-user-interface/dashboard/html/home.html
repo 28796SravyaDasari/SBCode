@@ -1,0 +1,111 @@
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+<ion-view view-title="">
+    <!--right button on navigation bar-->
+    <!--end right button on navigation bar-->
+    <style>
+
+
+.my-object {
+-webkit-animation: focus-in-expand 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-moz-animation: focus-in-expand 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: focus-in-expand 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@keyframes focus-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+        
+        .my-object1 {
+	-webkit-animation: focus-in-contract 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940)1.3s both;
+	-moz-animation: focus-in-contract 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940)1.3s both;
+	animation: focus-in-contract 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940)1.3s both;
+}
+        @keyframes focus-in-contract {
+  0% {
+    letter-spacing: 1em;
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+    </style>
+    <!--toolbar section-->
+    <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium borderbtmhm borderbtmhmtoolbr" >
+        <div class="">
+            <h1 class="my-object "><img class="imglogocss" src="img\Studbud.png"></h1>
+            <h2 class="my-object1">Welcome {{TeacherName}} to your college Companion</h2> </div>
+    </md-toolbar>
+    <!--end toolbar section-->
+    <!--dashboard section-->
+    <ion-content id="dashboard-content">
+
+         <ion-refresher on-refresh="doRefresh()">
+                     
+      </ion-refresher>
+
+        <div class="card">
+            <div class="item item-divider"><span>{{currentTime}}</span><span class="pull-right">{{currentDay}}</span></div>
+           <!-- <div class="item item-text-wrap">
+                <div class="row">
+                    <div class="col-50">
+                        <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"> </canvas>
+                    </div>
+                    <div class="col">
+                        <br><span style="color:#f7464a" ng-repeat="item in GraphDetails">{{item.coursename}}-{{item.subjectname}} {{item.totalsubject}}</span>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        <!--list section-->
+        
+        
+        <div class="card" ng-if='UpdateData'>
+            <div class="item item-divider" ng-click='openUpdateLink()'><span style="color:red"> New version available update now!</span></div>
+        </div>
+        
+        <div class="card">
+            <div class="item item-divider"> Upcoming Lectures </div>
+            <div class="item item-text-wrap">
+                <ion-list show-delete="false" can-swipe="true">
+                    <!--<ion-item href="#" ng-repeat="item in TimeTable"  ng-if="(item.LectStart |currentLecFilter) > currTime">-->
+                    <ion-item href="#" ng-repeat="item in TimeTable">
+                        <i class="fa fa-book"></i>&nbsp;{{item.LectStart | timeFilter}} {{item.subjectName}} ({{item.coursename}})
+                        <ion-option-button class="button-balanced ion-checkmark-circled" ng-show="item.verify" ng-click="verifyLecHmePge(0,item.TimeTableId)"></ion-option-button>
+                        <ion-option-button class="button-assertive ion-close-circled" ng-show="!item.verify" ng-click="verifyLecHmePge(1,item.TimeTableId)"></ion-option-button>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+        <!--list section-->
+        <div class="card" ng-init="loadNoticeForCurrentMonth()">
+            <div class="item item-divider" ui-sref="app.notices"> Latest Notices </div>
+            <div class="item item-text-wrap" ng-repeat="item in Notice | unique: 'content' | limitTo:3">
+                <div class="row menu-item">
+                    
+                    <div class="col-80"> <i class="fa fa-bullhorn"></i> &nbsp;&nbsp;<span ng-click="showContentAlert(item.title,item.content)"> {{item.title}}- {{item.course}}</span> </div>
+                    <div class="col-20 menu-more" ng-if="item.attach"> <i class="ion-ios-cloud-download-outline" ng-click="downloadAttachment(item.attach)"></i> </div>
+                </div>
+            </div>
+        </div>
+        <!--Below code it will disable animation to better performance-->
+        </md-list-item>
+        </md-list>
+        <!--end list section-->
+    </ion-content>
+    <!--end dashboard section-->
+</ion-view>

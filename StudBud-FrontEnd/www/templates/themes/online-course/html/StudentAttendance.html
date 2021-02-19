@@ -1,0 +1,112 @@
+﻿<!--View Information-->
+<!--View name : NEWS Feed-->
+<!--State name : app.newsFeed-->
+<!--URL : #app/newsFeed-->
+<ion-view title="Students Attendance" ng-init="loadCourseDetails('GetCourseMaster')">
+  <!--news feed section-->
+
+  <!--<div id="contract-details-content">
+            <md-input-container md-no-float> <i class="ion-ios-calendar-outline"></i>
+                <input type="text" id="noticedate" ng-model='month' required placeholder="Start Typing Month Here" ng-click='openDatePicker()'> </md-input-container>
+        </div>-->
+  <ion-header-bar class="bar-subheader custom">
+
+    <div class="row">
+      <div class="col-33 item no-border">
+      </div>
+      <div class="col-50 item no-border">
+
+        <md-select ng-model="studCourse">
+          <md-option selected="selected" value="">Course</md-option>
+          <md-option ng-repeat="item in Course" value="{{item.id}}">{{item.name}}</md-option>
+
+        </md-select>
+      </div>
+      <div class="col-17 item no-border">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <center> <label class="item item-input no-border"> <span class="input-label">From Date <i class="ion ion-compass"></i></span></center></label>
+
+          <center> <input id='frmDate' style="border-bottom-style: groove; border-width:1px" ng-click="openDatePickerfrmDate('frmDate')"
+              type="text" required placeholder="From Date" ng-model='frmDate'> </center>
+      </div>
+      <div class="col">
+        <center> <label class="item item-input no-border"> <span class="input-label">To Date <i class="ion ion-compass"></i></span></center></label>
+
+          <center> <input id='toDate' style="border-bottom-style: groove; border-width:1px" ng-click="openDatePickertoDate('toDate')"
+              type="text" required placeholder="To Date" ng-model='toDate'> </center>
+      </div>
+      <!--<hr>-->
+    </div>
+
+    <div>
+      <a class="button button-full button-positive-green-noraduis button-addon" ng-click="loadStudentAttendance()"> Load Attendance </a>
+    </div>
+
+
+    <div class="row">
+      <div class="bgdefualtbg col-33 item no-border">
+        <md-select ng-model="studFilter" class="custom">
+          <md-option selected="selected" value="">Student</md-option>
+          <md-option ng-repeat="item in AttendanceData | unique: 'studentname'" value="{{item.studentname}}">{{item.studentname}}</md-option>
+        </md-select>
+      </div>
+      <div class="bgdefualtbg col-33 item no-border">
+        <md-select ng-model="subFilter" class="custom">
+          <md-option selected="selected" value="">Subject</md-option>
+          <md-option ng-repeat="item in AttendanceData | unique: 'subjectname'" value="{{item.subjectname}}">{{item.subjectname}}</md-option>
+        </md-select>
+      </div>
+
+      <div class="bgdefualtbg col-33 item no-border">
+        <md-select ng-model="dateFilter" class="custom">
+          <md-option selected="selected" value="">Date</md-option>
+          <md-option ng-repeat="item in AttendanceData | unique: 'Attendencedatae'" value="{{item.Attendencedatae}}">{{item.Attendencedatae | limitTo:10}}</md-option>
+        </md-select>
+      </div>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-subheader-custom" id="online-course-content">
+    <br><br><br>
+    <div id="news-feed-content" style="padding-top:25px">
+      <div class="news-item" ng-repeat="item in AttendanceData | filter:{Attendencedatae:dateFilter}|filter:{subjectname:subFilter}|filter:{studentname:studFilter}">
+        <!--header section-->
+        <div class="bgattendencelist row header">
+          {{item.studentname}}
+        </div>
+        <div class="row header">
+
+          <div class="col-20"> <img src="img/profileAvatar.jpg" class="user-img" /> </div>
+          <div class="col-80"> <span class="name">
+                      {{item.Attendencedatae | limitTo:10}} <span class="pull-right">{{item.fromslot | timeFilter}}-{{item.toslot | timeFilter}}</span>
+            </span>
+            <br/> <span class="datetime" ng-style="item.Attendencestatus==1?{'color':'green'} : {'color':'red'}">{{item.Attendencestatus == 1 ? 'Present' : 'Absent'}}<span class="pull-right">{{item.subjectname}}</span>
+            </span>
+
+          </div>
+        </div>
+        <!--end header section-->
+        <!--detail section-->
+        <!-- <div class="row detail">
+                    <div class="col">
+                        <h1>
+                       {{item.subjectname}}
+                    </h1>
+                        <p class="content">{{item.Attendencestatus == '1' ? 'Present' : 'Absent'}}</p>
+                    </div>
+                </div>-->
+        <!--footer section-->
+        <!-- <div class="row footer">
+          <div> <span class="wording" ><strong></strong></span><span class="wording"></span> </div>
+        </div> -->
+        <!--end footer section-->
+      </div>
+    </div>
+    <div class="row"></div>
+  </ion-content>
+  <!--end news feed section-->
+</ion-view>

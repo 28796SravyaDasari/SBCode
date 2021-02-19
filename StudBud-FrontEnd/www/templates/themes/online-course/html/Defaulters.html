@@ -1,0 +1,71 @@
+﻿<!--View Information-->
+<!--View name : Online Course-->
+<!--State name : app.onlineCourse-->
+<!--URL : #app/onlineCourse-->
+<!--Online course section-->
+<ion-view title="Defaulters" id="online-course">
+     <!--end left button on navigation bar-->
+    <!--toolbar section-->
+    <ion-content ng-init="loadSubjectsForteacher()">   
+       <!-- <center><h4>Make Selections to Manage</h4></center>-->
+
+        <div class="row">
+            <div class="col-50 item no-border" >
+                <md-select ng-model="course" class="custom">
+                    <md-option selected="selected" value="">Course</md-option>
+                    <md-option ng-repeat="sub in SubjectName | unique: 'coursename'" value="{{sub.coursename}}">{{sub.coursename}}</md-option>
+                </md-select>
+            </div>
+
+            <div class="col-50 item no-border" >
+                <md-select ng-model="subjectt" class="custom" >
+                    <md-option selected="selected" value="">Subject</md-option>
+                    <md-option ng-repeat="sub in SubjectName | filter:course" value="{{sub.id}}">{{sub.SubjectName}}</md-option>
+                </md-select>
+            </div>
+            <div class="col-33 item no-border" >
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-50 item no-border" >
+                <input id='Text2' type="text" style="border-bottom-style: groove; border-width:1px" required placeholder="From Date" ng-model='frmDate' ng-click="openDatePickerFrom()"></md-input-container>
+            </div>
+
+            <div class="col-50 item no-border" >
+                <input id='Text3' type="text" style="border-bottom-style: groove; border-width:1px" required placeholder="To Date" ng-model='toDate' ng-click="openDatePickerTo()"></md-input-container>
+            </div>
+            <div class="col-33 item no-border" >
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-33 item no-border" >
+                
+            </div>
+
+            <div class="col-50 item no-border" >
+                <input id='Text1' type="text" style="border-bottom-style: groove; margin-left:-38px; border-width:1px" required placeholder="Desired percent %" ng-model='percentag'></md-input-container>
+            </div>
+            <div class="col-33 item no-border" >
+            </div>
+        </div>
+
+        <a class="button button-full button-positive button-addon" ng-click="getDefaulters(subjectt,percentag)"> Search </a>
+        
+        <ion-list show-delete="false" can-swipe="true">
+           
+            <ion-item class="item item-text-wrap" href="#" ng-repeat="stud in Students">
+            <i class="ion ion-pound"></i>&nbsp;Id: {{stud.RollNo}} - <b> Total: {{stud.Total}} Attended: {{stud.Attended}} Per: {{stud.per}}</b><br>
+            <!--Attendance: 67%-->
+           <!-- <ion-option-button ng-click="showmap(stud.lati,stud.longi)" class="button-calm ion-ios-location" ></ion-option-button>-->
+            </ion-item> 
+        </ion-list>
+       
+    </ion-content>
+    <!--  
+<div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" aria-label="Add"> <i class="ion-android-star"></i> </a>
+    </div>-->
+</ion-view>
+<!--end online course section-->

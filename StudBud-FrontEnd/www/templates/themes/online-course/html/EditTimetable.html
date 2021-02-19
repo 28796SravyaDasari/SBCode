@@ -1,0 +1,121 @@
+<!--View Information-->
+<!--View name : Online Course-->
+<!--State name : app.onlineCourse-->
+<!--URL : #app/onlineCourse-->
+<!--Online course section-->
+<ion-view title="Edit TimeTable" id="online-course">
+      <ion-nav-buttons side="right">
+        <md-button ng-disabled="isLoading" class="md-icon-button ion-nav-button-right" ng-click="popover.show($event)"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons>
+    <!--toolbar section-->
+    <!--end toolbar section-->
+    <br>
+    <!--end toolbar section-->
+    <br>
+    <ion-header-bar class="bar-subheader custom" ng-init="loadSubjectsForteacher(); loadCourse(); loadLocation();">
+    <!--<div class="row">
+        <div class="col-50">
+            <label class="item item-input item-stacked-label"> <span class="input-label">From <i class="ion ion-compass"></i></span>
+                <input type="date" placeholder="from"> </label>
+        </div>
+        <div class="col border-bottom-1">
+           <center> <label class="item item-input no-border"> <span class="input-label">From Date <i class="ion ion-compass"></i></span></center></label>
+           
+               <center> <input type="text" placeholder="Select Date" ng-model="datetext"> </center>
+        </div>
+         <div class="col border-bottom-1">
+           <center> <label class="item item-input no-border"> <span class="input-label">To Date <i class="ion ion-compass"></i></span></center></label>
+           
+               <center> <input type="text" placeholder="Select Date" ng-model="datetext"> </center>
+        </div>
+        <hr>
+    </div>-->
+    <div class="row">
+        <div class="col-33 item  no-border">
+            <!--<md-select ng-model="a" class="custom">
+                <md-option selected="selected">Class</md-option>
+                <md-option>BCOM</md-option>
+                <md-option>MCOM</md-option>
+                <md-option>FYJC</md-option>
+            </md-select>-->
+        </div>
+        <div class="col-33 item no-border" >
+            <md-select ng-model="corse">
+                <md-option selected="selected" value="">Course</md-option>
+                <md-option ng-repeat="item in Course" value="{{item.name}}">{{item.name}}</md-option>
+            </md-select>
+        </div>
+        <div class="col-33 item no-border" >
+            <!--<md-select ng-model="c">
+                <md-option selected="selected">Division</md-option>
+                <md-option>A</md-option>
+                <md-option>B</md-option>
+                <md-option>C</md-option>
+            </md-select>-->
+        </div>
+    </div>
+    
+   
+     <span class="item item-icon-left item-icon-right no-border" >
+    <i class="icon ion-chevron-left" ng-click="subadayEdit()" ng-if="!cannotEditTT"></i>
+         <center ng-click="openDatePickerEditNoticeDate()">{{datetext}}</center>
+    <i class="icon ion-chevron-right" ng-click="addadayEdit()"></i>
+  </span>
+    </ion-header-bar>
+     </div>
+    <ion-content class="has-subheader-custom" id="online-course-content" >
+   
+        
+        <ion-refresher on-refresh="editLecRefresh()">
+        
+        </ion-refresher>
+
+        <div class="course-list" style="padding-top:30px" ng-if="!corse==''">
+
+            <!--content item section-->
+            <div class="course-item" ng-repeat="item in TimeTableEdit | filter:corse">
+                <div class="title angular-course-background" id="generic">
+                 {{item.subjectName}}<span class="pull-right"> {{item.LectStart | timeFilter}} - {{item.LectEnd | timeFilter}} </span>
+                </div>
+                <div class="content">
+                    <h1>
+                         <md-select ng-model="item.sbjectId" class="custom">
+                            <!--<md-option selected="selected" value="">Subject</md-option>-->
+                            <md-option value="{{sub.id}}" ng-repeat="sub in SubjectName | filter:corse">{{sub.SubjectName}}</md-option>
+                           
+                        </md-select>
+                    </h1>
+                    <h1>
+                      <md-select ng-model="item.locationid" class="custom">
+                            <!--<md-option selected="selected" value="">Subject</md-option>-->
+                            <md-option value="{{loc.id}}" ng-repeat="loc in Location">{{loc.location}}</md-option>
+                           
+                        </md-select>
+                    </h1>
+                
+                </div>
+            </div> <!--end content item section-->
+
+            <!--content item section-->
+           
+
+            <!--content item section-->
+           
+
+            <!--content item section-->
+           
+            <a class="button button-full button-positive" ng-click="editTable()">
+Save Progress
+</a>
+            
+            </ion-content>
+  <!--  
+<div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" aria-label="Add"> <i class="ion-android-star"></i> </a>
+    </div>-->
+    
+</ion-view>
+<!--end online course section-->

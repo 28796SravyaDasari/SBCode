@@ -1,0 +1,153 @@
+<!--View Information-->
+<!--View name : NEWS Feed-->
+<!--State name : app.newsFeed-->
+<!--URL : #app/newsFeed-->
+
+<ion-view title="Notices">
+        <ion-header-bar class="bar-subheader custom1" >
+            
+
+    <div class="row">
+      <!--  <div class="col-50">
+            <label class="item item-input item-stacked-label"> <span class="input-label">From <i class="ion ion-compass"></i></span>
+                <input type="date" placeholder="from"> </label>
+        </div>-->
+        <!--<div class="col border-bottom-1">
+           <center> <label class="item item-input no-border"> <span class="input-label">Date <i class="ion ion-compass"></i></span></center></label>
+           
+               <center> <input type="text" id="noticedate" placeholder="Select Date" ng-model="datetext" ng-click="openDatePicker()"> </center>
+        </div>-->
+
+       <!-- <div class="row">
+        <div class="col-33">
+            
+        </div>
+        <div class="col-33">
+            <md-select ng-model="month" ng-change="loadNoticeForCurrentMonth(month)">
+                <md-option selected="selected" value="">Month</md-option>
+                <md-option value="2017-01-05">Jan</md-option>
+                <md-option value="2017-02-05">Feb</md-option>
+                <md-option value="2017-03-05">March</md-option>
+                <md-option value="2017-04-05">April</md-option>
+                <md-option value="2017-05-05">May</md-option>
+                <md-option value="2017-06-05">June</md-option>
+                <md-option value="2017-07-05">July</md-option>
+                <md-option value="2017-08-05">Aug</md-option>
+                <md-option value="2017-09-05">Sept</md-option>
+                <md-option value="2017-10-05">Oct</md-option>
+                <md-option value="2017-11-05">Nov</md-option>
+                <md-option value="2017-12-05">Dec</md-option>
+            </md-select>
+        </div>
+        <div class="col-33" >
+           
+        </div>
+    </div>-->
+
+        <hr>
+    </div>
+    <div class="row" ng-init='loadCourses()'>
+        
+        <div class="col-50 item no-border" >
+            <md-select ng-model="month" ng-change="loadNoticeForCurrentMonth(month)">
+                <md-option value="2017-01-05" ng-selected="{{ jan == true }}">Jan</md-option>
+                <md-option value="2017-02-05" ng-selected="{{ feb == true }}">Feb</md-option>
+                <md-option value="2017-03-05" ng-selected="{{ mar == true }}">March</md-option>
+                <md-option value="2017-04-05" ng-selected="{{ apr == true }}">April</md-option>
+                <md-option value="2017-05-05" ng-selected="{{ may == true }}">May</md-option>
+                <md-option value="2017-06-05" ng-selected="{{ jun == true }}">June</md-option>
+                <md-option value="2017-07-05" ng-selected="{{ jul == true }}">July</md-option>
+                <md-option value="2017-08-05" ng-selected="{{ aug == true }}">Aug</md-option>
+                <md-option value="2017-09-05" ng-selected="{{ sep == true }}">Sept</md-option>
+                <md-option value="2017-10-05" ng-selected="{{ act == true }}">Oct</md-option>
+                <md-option value="2017-11-05" ng-selected="{{ nov == true }}">Nov</md-option>
+                <md-option value="2017-12-05" ng-selected="{{ dec == true }}">Dec</md-option>
+            </md-select>
+        </div>
+       <!-- <div class="col-33 item no-border">
+            
+        </div>-->
+        <div class="col-50 item no-border" >
+           <md-select ng-model="a" class="custom">
+                <md-option selected="selected" value="">Course</md-option>
+                <md-option ng-repeat="corse in Course" value="{{corse.name}}">{{corse.name}}</md-option>
+            </md-select>
+        </div>
+    </div>
+ 
+    </ion-header-bar>
+    <!--news feed section-->
+    <ion-content class="has-subheader-custom1">
+     
+        <ion-refresher on-refresh="doRefresh()">
+                     
+      </ion-refresher>
+<div id="news-feed-content" >
+        
+         <br /> <br />
+    <div class="news-item" ng-repeat="item in Notice | filter:a ">
+                <!--header section-->
+                <div class="row header">
+                    <div class="col-20"> <img src="img/profileAvatar.jpg" class="user-img" /> 
+                    </div>
+                    <div class="col-80"> 
+                        <span class="name">
+                           {{item.course}} - {{item.teacher}}
+                        </span>
+                        <span class="customefontcss pull-right">
+                           <i class="fa fa-trash" ng-click="deleteNotice(item.noticesid)"></i>
+                        </span>
+                        <br/> 
+                        <span class="datetime">
+                        {{item.Ymonth | date:'fullDate'}}
+                        </span> 
+                    </div>
+                </div>
+                <!--end header section-->
+                <!--detail section-->
+                <div class="row detail">
+                    <div class="col">
+                        <h1>
+                        {{item.title}}
+                    </h1>
+                        <p class="content" ng-click='showContentAlert(item.title,item.content)'>{{item.content | limitTextContent}}</p>
+                    </div>
+                </div>
+                <!--footer section-->
+                <div class="row footer" ng-if="item.attach">
+                   
+                    <div><strong><i class="ion-ios-cloud-download-outline"></i></strong> &nbsp;&nbsp;
+                        <span class="wording" ng-click="downloadAttachment(item.attach)">{{item.attach | splitDownloadLink}} &nbsp;&nbsp; {{item.attach | splitSizeLink}}</span>
+                        
+                    </div>
+                </div>
+                <!--end footer section-->
+            </div>
+
+   
+
+        </div>
+         <div class="card" ng-if="noNoticesToShow">
+  <div class="item item-text-wrap">
+    No notices to show
+  </div>
+</div>
+        
+
+        
+
+        
+
+        
+
+        <div class="row"></div>
+    </ion-content><!--end news feed section-->
+
+    <!--footer fab bar-->
+    <div class="footer-fab-bar">
+        <a ng-if="canCreateNotice"  class="md-button md-accent md-fab fab-footer" ng-click="navigateTo('app.addnotice')" aria-label="Add">
+            <i class="ion-android-create"></i>
+        </a>
+    </div><!--end footer fab bar-->
+  
+</ion-view>

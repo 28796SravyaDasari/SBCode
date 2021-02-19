@@ -1,0 +1,48 @@
+<!--View Information-->
+<!--View name : Online Course-->
+<!--State name : app.onlineCourse-->
+<!--URL : #app/onlineCourse-->
+<!--Online course section-->
+<ion-view title="Academic Year" id="online-course">
+    <ion-nav-buttons side="right">
+        <md-button ng-disabled="isLoading" class="md-icon-button ion-nav-button-right" ng-click="popover.show($event)" aria-label="Setting"> <i class="ion-android-more-vertical"></i> </md-button>
+    </ion-nav-buttons>
+    <!--toolbar section-->
+    <ion-content>    <center>
+                    <h4>Manage Your Academic Calender</h4> </center>
+         <ion-list >
+             <ion-item class="minuspad"> <i class="ion-plus-round"></i> &nbsp; New Course </ion-item>
+                
+                
+                </ion-list>
+        <ion-list show-delete="false" can-swipe="true">
+            <ion-item href="#"> <i class="fa fa-book"></i>&nbsp;<b>BMS FY A</b><hr>
+                <br><i class="ion-icon ion-calendar"></i>&nbsp;12th January 2017 to 31st March 2017
+                <br><i class="ion-icon ion-clock"></i>&nbsp; 1:00 pm to 3:00 pm
+                <ion-option-button class="button-calm ion-edit"></ion-option-button>
+                <ion-option-button class="button-assertive ion-ios-trash"></ion-option-button>
+            </ion-item>
+            <ion-item href="#">
+                <h2> <i class="fa fa-book"></i>&nbsp;<b>BMS FY B</b><hr>
+                        <br><i class="ion-icon ion-calendar"></i>&nbsp;12th January 2017 to 31st March 2017<br>
+                        <i class="ion-icon ion-clock"></i>&nbsp;3:00 pm to 5:00 pm
+                        
+                          <ion-option-button class="button-calm ion-edit" ></ion-option-button>
+                         <ion-option-button class="button-assertive ion-ios-trash" ></ion-option-button>
+                       
+                       
+                    </ion-item>
+                
+                
+                </ion-list>
+              
+     
+           
+       
+    </ion-content>
+    <!--  
+<div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" aria-label="Add"> <i class="ion-android-star"></i> </a>
+    </div>-->
+</ion-view>
+<!--end online course section-->

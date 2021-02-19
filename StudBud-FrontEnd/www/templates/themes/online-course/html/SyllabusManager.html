@@ -1,0 +1,40 @@
+<!--View Information-->
+<!--View name : Online Course-->
+<!--State name : app.onlineCourse-->
+<!--URL : #app/onlineCourse-->
+<!--Online course section-->
+<ion-view title="Syllabus Manager" id="online-course">
+    <ion-nav-buttons side="right">
+        <md-button ng-disabled="isLoading" class="md-icon-button ion-nav-button-right" ng-click="popover.show($event)" aria-label="Setting"> <i class="ion-android-more-vertical"></i> </md-button>
+    </ion-nav-buttons>
+    <!--toolbar section-->
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <center>
+                    <h4>Syllabus Manager</h4> </center>
+                <ion-list>
+                    
+                    <div ng-repeat="group in groups">
+                        <ion-item class="minuspad" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}" can-swipe="true"> <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-folder'"></i> &nbsp; Group {{group.name}}  <span class="pull-right">1{{group.name}} Mb</span>
+                            <ion-option-button class="button-balanced ion-android-upload"></ion-option-button>
+                            <ion-option-button class="button-calm ion-android-share-alt"></ion-option-button>
+                            <ion-option-button class="button-assertive ion-trash-a"></ion-option-button>
+                        </ion-item>
+                        <ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)" can-swipe="true"> <i class="fa fa-file-word-o "></i> {{item}}
+                            <ion-option-button class="button-calm ion-android-share-alt"></ion-option-button>
+                            <ion-option-button class="button-assertive ion-trash-a"></ion-option-button>
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </div>
+        </div>
+        <br>
+    
+    </ion-content>
+    <!--  
+<div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" aria-label="Add"> <i class="ion-android-star"></i> </a>
+    </div>-->
+</ion-view>
+<!--end online course section-->

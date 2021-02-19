@@ -1,0 +1,11 @@
+<ion-popover-view>
+    <ion-content>
+        <div class="list">
+            <a class="item" ng-click="goadd()" ng-if="canAddAttendance"> <i class="ion ion-plus-round"></i> &nbsp; Add </a>
+            <a class="item" ng-click="goapprove()" ng-if="canApproveList"> <i class="ion ion-thumbsup"></i> &nbsp;Approve</a>
+            <a class="item" ng-click="gorecord()"> <i class="ion ion-person-add"></i>&nbsp; Record </a>
+            <a class="item" ng-click="golists()"> <i class="ion ion-person-stalker"></i>&nbsp; My Lists</a>
+            <a class="item" ng-click="closepops()"> <i class="ion ion-android-close"></i>&nbsp; Close </a>
+        </div>
+    </ion-content>
+</ion-popover-view>

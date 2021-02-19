@@ -1,0 +1,204 @@
+<!--View Information-->
+<!--View name : Note List-->
+<!--Controller name : noteListCtrl-->
+<!--Controller path : www/templates/application-storage/local-application-db/js/controllers.js-->
+<!--State name : app.notelist-->
+<!--URL : #app/notelist-->
+<ion-view title="Add Attendance ">
+    <ion-nav-buttons side="right">
+        <md-button ng-disabled="isLoading" class="md-icon-button ion-nav-button-right" ng-click="popover.show($event)" aria-label="Setting"> <i class="ion-android-more-vertical"></i> </md-button>
+    </ion-nav-buttons>
+    <ion-content id="contract-details-content">
+
+        <ion-refresher on-refresh="searchStudentOnrefresh(RollNumber,Date)">
+                     
+      </ion-refresher>
+
+        <style>
+            .item-avatar i:first-child,
+            .item-avatar .item-img {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                font-size: 36px;
+                max-width: 40px;
+                max-height: 40px;
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            ::-webkit-input-placeholder {
+                text-align: left;
+            }
+
+            :-ms-input-placeholder {
+                text-align: left;
+            }
+
+            input {
+                text-align: left;
+            }
+
+            rollnumber {
+                text-align: center;
+            }
+
+            input[type=checkbox] {
+                display: none;
+            }
+
+                input[type=checkbox] + label {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    font-size: 20px;
+                    line-height: 50px;
+                    text-align: center;
+                    background-color: #e91e63;
+                    display: inline-block;
+                    padding: 0 0 0 0px;
+                    /*                 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+                }
+
+                input[type=checkbox]:checked + label {
+                    background-color: #00a86b;
+                    font-size: 20px;
+                    display: inline-block;
+                    padding: 0 0 0 0px;
+                }
+        </style>
+        
+            
+               
+            
+        <div class="row" onload="initDatePicker()">
+            <div class="col-50">
+                <a class="button button-block button-calm" ng-click="rollnumberfunc()" ng-show="rollnumber" ng-hide="class"> Individual </a>
+                <a class="button button-block button-stable" ng-click="rollnumberfunc()" ng-show="class" ng-hide="rollnumber"> Individual </a>
+            </div>
+            <div class="col-50">
+                <a class="button button-block button-calm" ng-click="classfunc()" ng-show="class" ng-hide="rollnumber"> Class </a>
+                <a class="button button-block button-stable" ng-click="classfunc()" ng-show="rollnumber" ng-hide="class"> Class </a>
+            </div>
+        </div>
+        <div ng-show="rollnumber" ng-hide="class">
+            <div class="row">
+
+                <!--<div class="col border-bottom-1">
+                    <center>
+                        <label class="item item-input no-border"> <span class="input-label"><i class="ion ion-pound"></i> Date</span></center>
+                    </label>
+                    <center>
+                        <input type="text" id="searchDate" class="rollnumber" placeholder="Look for Date" ng-model="Date" ng-click="openDatePicker()" style="text-align: center;-ms-input-placeholder:center;"> </center>
+                </div>-->
+
+                <div class="col border-bottom-1">
+                    <center>
+                        <label class="item item-input no-border"> <span class="input-label"><i class="ion ion-pound"></i> Enrollment Number</span></center>
+                    </label>
+                    <center>
+                        <input type="text" class="rollnumber" placeholder="Look for Enrollment Number" ng-model="RollNumber" style="text-align: center;-ms-input-placeholder:center;"> </center>
+                </div>
+
+                
+               
+            </div>
+            <div class="row">
+                 <a class="button button-full button-positive button-addon" style="width:100%" ng-click="searchStudent(RollNumber,Date)"> Search </a>
+            </div>
+            <br>
+            <!--<div class="row" ng-if="recordFound">-->
+                <div class="row">
+                <div class="col">
+                    <center>
+                        <h4>{{StudName}}</h4>
+                        <p>Currently {{totalPercent}}%</p></center>
+                    <div class="list">
+                        <a class="item item-avatar" href="#" ng-repeat="choice in specialAttendance"> <i class="icon ion-ios-bookmarks-outline"></i>
+                            <h2>{{choice.SubName}}</h2>
+                            <p>
+                                <input type="number" placeholder="Attendance" ng-model="choice.Per">
+                            </p>
+                        </a>
+                        <!--<a class="item item-avatar" href="#"> <i class="icon ion-ios-bookmarks-outline"></i>
+                            <h2>Literature</h2>
+                            <p>
+                                <input type="text" placeholder="Attendance">
+                            </p>
+                        </a>
+                        <a class="item item-avatar" href="#"> <i class="icon ion-ios-bookmarks-outline"></i>
+                            <h2>Javascript</h2>
+                            <p>
+                                <input type="text" placeholder="Attendance">
+                            </p>
+                        </a>
+                        <a class="item item-avatar" href="#"> <i class="icon ion-ios-bookmarks-outline"></i>
+                            <h2>Tax</h2>
+                            <p>
+                                <input type="text" placeholder="Attendance">
+                            </p>
+                        </a>-->
+                    </div>
+                </div>
+            </div>
+            <a class="button button-full button-positive button-addon"  ng-click="addIndiAttendance(RollNumber)" ng-click-options="{preventDoubleClick:true}"> Save </a>
+        </div>
+        <div  ng-show="class" ng-hide="rollnumber" ng-init="loadCourseDetails()">
+            <div class="row">
+                <div class="col border-bottom-1"><center>Select Course below</center>
+                  <div class="row">
+        <div class="col-50 item no-border">
+            <center>
+                <md-select ng-model="corse" class="custom" ng-change="loadClassAttendance(corse)">
+                    <md-option selected="selected" value="">Class</md-option>
+                    <md-option ng-repeat="item in Course" value="{{item.id}}">{{item.name}}</md-option>
+                </md-select>
+            </center>
+           
+        </div>
+
+        <div class="col-50 item no-border" >
+             <input type="text" placeholder="Search Student" ng-model="searchStd">
+        </div>
+                    </div>
+                    <div class="list">
+                        <a class="item item-avatar" ng-repeat="item in specialAttendanceClass | filter:searchStd"> <i class="icon ion-android-happy"></i>
+                            <h2>{{item.studname}}</h2>
+                            <h2>{{item.enrollmentno}}</h2>
+                            <p>
+                               <input type="number" placeholder="Attendance" ng-model="item.Percent">
+                            </p>
+                        </a>
+                    
+                    </div>
+                  
+                </div>
+            </div>
+            <!--<a class="button button-full button-positive button-addon" ng-click="markClasssAttendance(classDate,corse)"> Save </a>-->
+        </div>
+    </ion-content>
+
+     <div class="bar bar-footer" style="background-color:#11c1f3" ng-if="showFooter">
+        <div class="title whiteFont" ng-click="markClasssAttendance(classDate,corse)">Save</div>
+    </div>
+    <!--    <div class="footer-fab-bar">
+            <a class="md-button md-accent md-fab fab-footer" ng-click="showListBottomSheet($event,contractForm)"
+               aria-label="Contract Form Actions">
+                <i class="ion-android-star"></i>
+            </a>
+        </div>-->
+    <!--footer fab bar-->
+    <!--<div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" ng-click="navigateTo('app.notedetail')" aria-label="Add">
+            <i class="ion-android-create"></i>
+        </a>--></div>
+    <!--end footer fab bar-->
+    <!--loading progress-->
+    <div id="note-list-loading-progress" class="loading-progress fade-in">
+        <ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+        <md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <!--end loading progress-->
+</ion-view>

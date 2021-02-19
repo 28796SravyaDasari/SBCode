@@ -1,0 +1,211 @@
+<!--View Information-->
+<!--View name : Menu-->
+<!--Controller name : menuCtrl-->
+<!--Controller path : www/templates/menu/js/controllers.js-->
+<!--State name : app-->
+<!--URL : #app-->
+
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-balanced  material-background-nav-bar">
+            <ion-nav-buttons side="left">
+                <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <md-sidenav md-component-id="left" on-swipe-left="closeSideNav()" on-drag-left="closeSideNav()">
+        <!--menu section-->
+        <div class="material-background" id="toggle-menu-left-header">
+            <!--menu header section-->
+            <div class="menu-left-header" ng-click="navigateTo('app.home')">
+                <img class="user-img" src="img/profileAvatar.jpg">
+
+                <p>
+                    
+
+                    <span class="title" ><img class="menuimglogocss" src="img\Menulogp.png"></span>
+                    <br/>
+                    <span class="sub-title">Welcome {{TeacherName}} </span>
+                    
+                </p>
+            </div><!--end menu header section-->
+        </div> <!--menu content section-->
+        <ion-content id="toggle-menu-left-content">
+
+            <!--If device is android application will present below code.-->
+            <!--It will disable animation to better performance on android.-->
+            <!--list section-->
+            
+            <div ng-if="isAndroid" class="sectionmenu menu-list">
+                
+                <md-subheader class="md-warn">Everything you need</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.lecture')">
+                    <div class="col-33">
+                        <i class="fa fa-bar-chart "></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Lecture Planning</span>
+                    </div>
+                </div>
+                 <div class="row menu-item"  ng-click="navigateTo('app.notices')">
+                    <div class="col-33">
+                        <i class="fa fa-commenting-o "></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Notices</span>
+                    </div>
+                </div>
+                 <div class="row menu-item"  ng-click="navigateTo('app.attendance')">
+                    <div class="col-33">
+                        <i class="fa fa-calendar-check-o "></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Attendence</span>
+                    </div>
+                </div>
+                 <div class="row menu-item"  ng-click="navigateTo('app.StudentAttendance')">
+                    <div class="col-33">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>View Attendance</span>
+                    </div>
+                </div>
+                  <div class="row menu-item"  ng-click="navigateTo('app.students')">
+                    <div class="col-33">
+                        <i class="ion ion-person-stalker"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Students</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  ng-click="navigateTo('app.defaulters')">
+                    <div class="col-33">
+                        <i class="ion ion-planet"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Defaulters</span>
+                    </div>
+                </div>
+                <div class="row menu-item" ng-if="canSetAutoDefaulter" ng-click="navigateTo('app.autodefaulters')">
+                    <div class="col-33">
+                        <i class="ion ion-planet"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Auto Defaulters</span>
+                    </div>
+                </div>
+                 <div class="row menu-item"  ng-click="navigateTo('app.logout')" ng-if="isLoggedIn">
+                    <div class="col-33">
+                        <i class="fa fa-gears"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Logout</span>
+                    </div>
+                </div>
+
+                 <md-subheader class="md-warn">Everything Else</md-subheader>
+                <div class="row menu-item"  ng-click="navigateTo('app.tryAppNoBackBtn')">
+                    <div class="col-33">
+                        <i class="fa fa-play"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Getting Started</span>
+                    </div>
+                </div>
+                 <div class="row menu-item" ng-click="navigateTo('app.settings')">
+                    <div class="col-33">
+                        <i class="fa fa-gears"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Settings</span>
+                    </div>
+                </div>
+               
+
+
+                
+
+                <div class="row menu-item"  >
+                    <div class="col-33">
+                        <i class="fa fa-question"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Help</span>
+                    </div>
+                </div>
+                <div class="row menu-item"  >
+                    <div class="col-33">
+                        <i class="fa fa-info"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Send Feedback</span>
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <!--If device is not Android application will present below code.-->
+            <!--It will show animation when selecting row.-->
+            <md-list ng-if="!isAndroid" class="sectionmenu">
+                <md-subheader class="md-warn">Everything You Need</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.lecture')">
+                    <i class="fa  fa-bar-chart "></i>
+                    <span>Lecture Planning</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.notices')">
+                    <i class="fa fa-commenting-o"></i>
+                    <span>Notices</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.attendance')">
+                    <i class="fa fa-calendar-check-o "></i>
+                    <span>Attendence</span>
+                </md-list-item> 
+                  <md-list-item class="menu-list-item" ng-click="navigateTo('app.StudentAttendance')">
+                    <i class="fa fa-line-chart"></i>
+                    <span>View Attendance</span>
+                </md-list-item> 
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.students')">
+                     <i class="ion ion-person-stalker"></i>
+                    <span>Students</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.defaulters')">
+                    <i class="ion ion-planet"></i>
+                    <span>Defaulters</span>
+                </md-list-item>
+                 <md-list-item ng-if="canSetAutoDefaulter" class="menu-list-item" ng-click="navigateTo('app.autodefaulters')">
+                    <i class="ion ion-planet"></i>
+                    <span>Auto Defaulters</span>
+                </md-list-item>
+                 <md-list-item class="menu-list-item" ng-click="navigateTo('app.logout')" ng-if="isLoggedIn">
+                    <i class="ion ion-android-remove"></i>
+                    <span>Logout</span>
+                </md-list-item>
+
+                  <md-subheader class="md-warn">Everything Else</md-subheader>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.tryAppNoBackBtn')">
+                    <i class="fa fa-play"></i>
+                    <span>Getting Started</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item"  ng-click="navigateTo('app.settings')">
+                    <i class="fa  fa-gears"></i>
+                    <span>Settings</span>
+                </md-list-item>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.tryAppNoBackBtn')">
+                    <i class="fa fa-question "></i>
+                    <span>Help</span>
+                </md-list-item>
+                   <md-list-item class="menu-list-item" ng-click="navigateTo('app.tryAppNoBackBtn')">
+                    <i class="fa fa-info-circle"></i>
+                    <span>Send Feedback</span>
+                </md-list-item>
+              
+            </md-list>
+            <!--end list section-->
+        </ion-content><!--end menu content section-->
+        <!--end menu section-->
+
+    </md-sidenav>
+</ion-side-menus>
